@@ -2,6 +2,7 @@ package hy.flappybird.sprite
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Matrix
 import android.graphics.Paint
 import hy.flappybird.BirdApp
 import java.util.*
@@ -27,7 +28,7 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
     private var upTmpY = tempY
 
     private val dis = 25
-    private val jump = 90//todo
+    private val jump = 75//todo
 
     private var i = 0
 
@@ -38,6 +39,24 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
     private var posMode = PosMode.MENU
 
     var earthHeight = 0
+
+
+    init {
+        upBirds.clear()
+        downBirds.clear()
+        deadBirds.clear()
+        for (bitmap in bitmaps) {
+            val matrix = Matrix()
+            matrix.postRotate(-20f)
+            upBirds.add(Bitmap.createBitmap(bitmap, 0, 0, bird_width, bird_height, matrix, true))
+            matrix.postRotate(20f)
+            downBirds.add(Bitmap.createBitmap(bitmap, 0, 0, bird_width, bird_height, matrix, true))
+            matrix.postRotate(90f)
+            deadBirds.add(Bitmap.createBitmap(bitmap, 0, 0, bird_width, bird_height, matrix, true))
+        }
+
+    }
+
 
     fun changeMode(posMode: PosMode) {
         this.posMode = posMode
@@ -58,7 +77,7 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
 //
 //                canvas.rotate(-45f,BirdApp.screenWidth/2f,BirdApp.screenHeight/2f)
                 //todo
-                canvas.drawBitmap(bitmaps[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
+                canvas.drawBitmap(upBirds[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
 
 //                canvas.rotate(45f,BirdApp.screenWidth/2f,BirdApp.screenHeight/2f)
 //
@@ -69,7 +88,7 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
 //
 //                canvas.rotate(90f,BirdApp.screenWidth/2f,BirdApp.screenHeight/2f)
                 //todo
-                canvas.drawBitmap(bitmaps[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
+                canvas.drawBitmap(downBirds[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
 
 //                canvas.rotate(-90f,BirdApp.screenWidth/2f,BirdApp.screenHeight/2f)
 //
@@ -79,7 +98,7 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
                 canvas.drawBitmap(bitmaps[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
             }
             Bird.PosMode.DEAD -> {
-                canvas.drawBitmap(bitmaps[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
+                canvas.drawBitmap(deadBirds[i % 3], x - readySize.toFloat(), y.toFloat(), paint)
             }
         }
 
@@ -116,7 +135,7 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
             }
             PosMode.UP -> {
                 //todo
-                y += 15
+                y += 14
 
                 if (count % 5 == 0)
                     i++
@@ -174,10 +193,10 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
         return false
     }
 
-    private var _onDead:(()->Unit)?=null
+    private var _onDead: (() -> Unit)? = null
 
-    fun dead(onDead:()->Unit){
-        _onDead=onDead
+    fun dead(onDead: () -> Unit) {
+        _onDead = onDead
     }
 
     enum class BirdMode {
@@ -190,6 +209,12 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
         PRESS, //手指按下
         UP, //手指抬起
         DEAD//死亡
+    }
+
+    companion object {
+        private val upBirds = Vector<Bitmap>()
+        private val downBirds = Vector<Bitmap>()
+        private val deadBirds = Vector<Bitmap>()
     }
 
 }
