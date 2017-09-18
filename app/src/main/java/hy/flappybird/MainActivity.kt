@@ -1,9 +1,9 @@
 package hy.flappybird
 
+import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
 
     private val birdView1: BirdView
         get() = BirdView(this)

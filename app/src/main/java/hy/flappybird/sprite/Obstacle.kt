@@ -17,10 +17,12 @@ import java.util.*
  */
 class Obstacle(private val downPillar: Bitmap, private val upPillar: Bitmap, bottom: Int) {
     //水管距离
-    private val dis = 350
-    private val minHeight = 350
+
     private val screenHeight = BirdApp.screenHeight
     private val screenWidth = BirdApp.screenWidth
+
+    private val dis = 350 * screenHeight / 1920
+    private val minHeight = 350 * screenHeight / 1920
 
     val width = downPillar.width
     private val height = downPillar.height
@@ -34,14 +36,14 @@ class Obstacle(private val downPillar: Bitmap, private val upPillar: Bitmap, bot
     val downRectF = RectF()
     val upRectF = RectF()
 
-    private var downHeight: Int = random.nextInt(realHeight - 2*minHeight-dis) + minHeight
+    private var downHeight: Int = random.nextInt(realHeight - 2 * minHeight - dis) + minHeight
     private var upHeight: Int = realHeight - dis - downHeight
 
     private val distance = (screenWidth - width) / 2
 
     private fun reset() {
         x = screenWidth
-        downHeight = random.nextInt(realHeight - 2*minHeight-dis) + minHeight
+        downHeight = random.nextInt(realHeight - 2 * minHeight - dis) + minHeight
         upHeight = realHeight - dis - downHeight
     }
 
@@ -55,10 +57,10 @@ class Obstacle(private val downPillar: Bitmap, private val upPillar: Bitmap, bot
 
     private var isFirst = true
 
-    var isDead=false
+    var isDead = false
 
     fun logic() {
-        if (!isDead){
+        if (!isDead) {
             x -= speed
 
             if (x + width <= 0) {
@@ -75,7 +77,7 @@ class Obstacle(private val downPillar: Bitmap, private val upPillar: Bitmap, bot
 
     fun reload() {
         isFirst = true
-        isDead=false
+        isDead = false
         reset()
     }
 

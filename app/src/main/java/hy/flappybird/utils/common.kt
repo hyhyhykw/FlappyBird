@@ -11,7 +11,6 @@ import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.view.View
 import android.view.animation.AnimationUtils
-import com.google.gson.Gson
 import org.jetbrains.anko.displayMetrics
 import java.lang.Exception
 
@@ -20,8 +19,6 @@ import java.lang.Exception
  * @author HY
  */
 fun isEmpty(str: String?) = null == str || str.isEmpty()
-
-val gson = Gson()
 
 fun parse(numStr: String?): Int {
     if (isEmpty(numStr)) {
@@ -86,7 +83,7 @@ fun View.screenWidth() = context.screenWidth()
 fun View.screenHeight() = context.screenHeight()
 fun View.densityDpi() = context.densityDpi()
 
-inline fun <reified T : View> Dialog.find(@IdRes id: Int): T = findViewById(id) as T
+inline fun <reified T : View> Dialog.find(@IdRes id: Int): T = findViewById(id)
 
 
 fun View.show() {

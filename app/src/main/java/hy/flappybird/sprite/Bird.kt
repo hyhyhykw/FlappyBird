@@ -27,8 +27,8 @@ class Bird(private val bitmaps: Vector<Bitmap>) {
     val tempY = y
     private var upTmpY = tempY
 
-    private val dis = 25
-    private val jump = 75//todo
+    private val dis = 25 * BirdApp.screenHeight / 1920
+    private val jump = 75 * BirdApp.screenHeight / 1920//todo
 
     private var i = 0
 

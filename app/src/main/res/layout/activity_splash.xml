@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="hy.flappybird.SplashActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:src="@drawable/other_load"
-        android:id="@+id/mIvLoad"
-        android:layout_width="match_parent"
-        android:scaleType="fitXY"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/str_load"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/mIvLoad"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:contentDescription="@string/str_load"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/other_load"/>-->
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
